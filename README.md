@@ -1,2 +1,1 @@
-# modern-compiler-implementation
-Haskell implementation of the Tiger language from the Modern Compiler Implementation in ML book
+TODO: add a description once the project is more mature
