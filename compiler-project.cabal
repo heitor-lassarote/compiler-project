@@ -1,0 +1,122 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           compiler-project
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/heitor-lassarote/compiler-project#readme>
+homepage:       https://github.com/heitor-lassarote/compiler-project#readme
+bug-reports:    https://github.com/heitor-lassarote/compiler-project/issues
+author:         Felipe Silva, Heitor Toledo Lassarote de Paula
+maintainer:     heitortoledo@hotmail.com
+copyright:      2022 Felipe Silva, Heitor Toledo Lassarote de Paula
+license:        GPL-3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/heitor-lassarote/compiler-project
+
+library
+  exposed-modules:
+      Language.Compiler.Range
+      Prelude
+  other-modules:
+      Paths_compiler_project
+  hs-source-dirs:
+      src
+  default-extensions:
+      BlockArguments
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveTraversable
+      DerivingStrategies
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      ImportQualifiedPost
+      LambdaCase
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      ScopedTypeVariables
+      StrictData
+      TupleSections
+      TypeApplications
+      ViewPatterns
+  ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe
+  build-depends:
+      base-noprelude
+    , universum
+  default-language: Haskell2010
+
+executable compiler-project-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_compiler_project
+  hs-source-dirs:
+      app
+  default-extensions:
+      BlockArguments
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveTraversable
+      DerivingStrategies
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      ImportQualifiedPost
+      LambdaCase
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      ScopedTypeVariables
+      StrictData
+      TupleSections
+      TypeApplications
+      ViewPatterns
+  ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base-noprelude
+    , compiler-project
+  default-language: Haskell2010
+
+test-suite compiler-project-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_compiler_project
+  hs-source-dirs:
+      test
+  default-extensions:
+      BlockArguments
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveTraversable
+      DerivingStrategies
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      ImportQualifiedPost
+      LambdaCase
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      ScopedTypeVariables
+      StrictData
+      TupleSections
+      TypeApplications
+      ViewPatterns
+  ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base-noprelude
+  default-language: Haskell2010

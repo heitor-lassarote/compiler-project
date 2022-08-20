@@ -1,0 +1,79 @@
+name:                compiler-project
+version:             0.1.0.0
+github:              "heitor-lassarote/compiler-project"
+license:             GPL-3
+author:              "Felipe Silva, Heitor Toledo Lassarote de Paula"
+maintainer:          "heitortoledo@hotmail.com"
+copyright:           "2022 Felipe Silva, Heitor Toledo Lassarote de Paula"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/heitor-lassarote/compiler-project#readme>
+
+dependencies:
+- base-noprelude
+
+default-extensions:
+- BlockArguments
+- DeriveFoldable
+- DeriveFunctor
+- DeriveGeneric
+- DeriveTraversable
+- DerivingStrategies
+- FlexibleInstances
+- GeneralizedNewtypeDeriving
+- ImportQualifiedPost
+- LambdaCase
+- MultiParamTypeClasses
+- MultiWayIf
+- NamedFieldPuns
+- OverloadedStrings
+- ScopedTypeVariables
+- StrictData
+- TupleSections
+- TypeApplications
+- ViewPatterns
+
+ghc-options:
+- -Weverything
+- -Wno-all-missed-specializations
+- -Wno-implicit-prelude
+- -Wno-missing-import-lists
+- -Wno-missing-safe-haskell-mode
+- -Wno-prepositive-qualified-module
+- -Wno-safe
+- -Wno-unsafe
+
+library:
+  source-dirs: src
+  dependencies:
+  - universum
+
+executables:
+  compiler-project-exe:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+    - compiler-project
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+tests:
+  compiler-project-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
