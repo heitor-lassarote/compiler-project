@@ -37,6 +37,7 @@ default-extensions:
 - MultiWayIf
 - NamedFieldPuns
 - OverloadedStrings
+- RecordWildCards
 - ScopedTypeVariables
 - StrictData
 - TupleSections
@@ -57,6 +58,7 @@ library:
   source-dirs: src
   dependencies:
   - universum
+  - unordered-containers
 
 executables:
   compiler-project-exe:
