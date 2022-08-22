@@ -1,0 +1,40 @@
+steps:
+  - simple_align:
+      cases: false
+      top_level_patterns: false
+      records: false
+  - imports:
+      align: none
+      list_align: after_alias
+      pad_module_names: false
+      long_list_align: new_line
+      empty_list_align: inherit
+      list_padding: 2
+      separate_lists: false
+      space_surround: false
+  - trailing_whitespace: {}
+
+columns: 100
+newline: native
+
+language_extensions:
+  - BlockArguments
+  - DeriveFoldable
+  - DeriveFunctor
+  - DeriveGeneric
+  - DeriveTraversable
+  - DerivingStrategies
+  - FlexibleInstances
+  - GeneralizedNewtypeDeriving
+  - ImportQualifiedPost
+  - LambdaCase
+  - MultiParamTypeClasses
+  - MultiWayIf
+  - NamedFieldPuns
+  - OverloadedStrings
+  - RecordWildCards
+  - ScopedTypeVariables
+  - StrictData
+  - TupleSections
+  - TypeApplications
+  - ViewPatterns
