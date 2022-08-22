@@ -1,4 +1,4 @@
-module Language.Compiler.Tree
+module Language.Elaborator.Tree
   ( Name
   , Expr (..)
   ) where
@@ -6,10 +6,12 @@ module Language.Compiler.Tree
 type Name = Text
 
 data Expr
-  = Type
+  = Typ
   | Var Name
   | Lam Name Expr
   | App Expr Expr
   | Pi Name Expr Expr
   | Ann Expr Expr
+  | Let Name Expr Expr Expr
+  | Hol
   deriving stock (Eq, Show)

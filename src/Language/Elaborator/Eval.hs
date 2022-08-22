@@ -1,13 +1,13 @@
-module Language.Compiler.Eval
+module Language.Elaborator.Eval
   ( eval, evalApp
   , quote
   ) where
 
 import Unsafe qualified
 
-import Language.Compiler.Types
+import Language.Elaborator.Types
 
-eval :: Ctx -> Term -> Value
+eval :: [Value] -> Term -> Value
 eval ctx = \case
   Type -> VType
   Var (Idx i) -> ctx Unsafe.!! i
@@ -16,6 +16,8 @@ eval ctx = \case
   App f x -> evalApp (eval ctx f) (eval ctx x)
   Pi var typ body -> VPi var (eval ctx typ) \x -> eval (x : ctx) body
   Ann var _typ -> eval ctx var
+  Let _ _ body t -> eval (eval ctx body : ctx) t
+  Hol hole -> VFlex hole []
 
 evalApp :: Value -> Value -> Value
 evalApp f x = case f of

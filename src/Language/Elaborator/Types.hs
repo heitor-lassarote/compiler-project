@@ -1,19 +1,10 @@
-module Language.Compiler.Types
-  ( module Language.Compiler.Types
+module Language.Elaborator.Types
+  ( module Language.Elaborator.Types
   ) where
 
 import Unsafe qualified
 
-import Language.Compiler.Tree (Name)
-
-type Ctx = [Value]
-
-lvlToIdx :: Lvl -> Idx -> Idx
-lvlToIdx (Lvl l) (Idx x) = Idx (l - x - 1)
-
-idxToLvl :: Idx -> Lvl -> Lvl
--- TODO: check this equation
-idxToLvl (Idx x) (Lvl l) = Lvl (x + 1 - l)
+import Language.Elaborator.Tree (Name)
 
 newtype Lvl = Lvl{getLvl :: Int}
   deriving stock (Eq, Ord, Show)
@@ -23,15 +14,23 @@ newtype Idx = Idx{getIdx :: Int}
   deriving stock (Eq, Ord, Show)
   deriving newtype (Num)
 
+lvlToIdx :: Lvl -> Idx -> Idx
+lvlToIdx (Lvl l) (Idx x) = Idx (l - x - 1)
+
+idxToLvl :: Idx -> Lvl -> Lvl
+idxToLvl (Idx x) (Lvl l) = Lvl (l + x + 1)
+
 data Term
   = Type
   | Var Idx
   | Free Name
   | Lam Name Term
+  | Let Name Term Term Term
   | App Term Term
   | Pi Name Term Term
   | Ann Term Term
-  deriving stock (Eq, Show)
+  | Hol (IORef Hole)
+  deriving stock Eq
 
 ppTerm :: [Name] -> Term -> Text
 ppTerm ctx = \case
@@ -40,10 +39,12 @@ ppTerm ctx = \case
   Free name -> name
   Lam name body -> "(\\" <> name <> " => " <> ppTerm (name : ctx) body <> ")"
   p@App{} -> "(" <> unwords (accumApp [] p) <> ")"
+  Let name ty val body -> "(let " <> name <> " : " <> ppTerm ctx ty <> " = " <> ppTerm ctx val <> " in " <> ppTerm ctx body <> ")"
   Pi var typ body
-    | var == "_" -> "(" <> ppTerm ctx typ <> " -> " <> ppTerm ctx body <> ")"
-    | otherwise  -> "((" <> var <> ": " <> ppTerm ctx typ <> ") -> " <> ppTerm ctx body <> ")"
+    | var == "_" -> "(" <> ppTerm ctx typ <> " -> " <> ppTerm ("_":ctx) body <> ")"
+    | otherwise  -> "((" <> var <> ": " <> ppTerm ctx typ <> ") -> " <> ppTerm (var: ctx) body <> ")"
   Ann var typ -> "(" <> ppTerm ctx var <> " : " <> ppTerm ctx typ <> ")"
+  Hol _ -> "?"
   where
     accumApp acc (App f@App{} y) = accumApp (ppTerm ctx y : acc) f
     accumApp acc (App f x) = ppTerm ctx f : ppTerm ctx x : acc

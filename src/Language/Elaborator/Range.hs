@@ -1,11 +1,11 @@
-module Language.Compiler.Range
+module Language.Elaborator.Range
   ( Pos (..)
   , Range (..)
   , (<->)
   ) where
 
 data Pos = Pos
-  { offset, x, y :: Int
+  { offset, line, column :: Int
   } deriving stock (Eq, Ord, Show)
 
 data Range = Range
