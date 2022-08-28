@@ -21,6 +21,7 @@ description:         Please see the README on GitHub at <https://github.com/heit
 
 dependencies:
 - base-noprelude
+- megaparsec
 
 default-extensions:
 - BlockArguments
@@ -43,6 +44,9 @@ default-extensions:
 - TupleSections
 - TypeApplications
 - ViewPatterns
+- ConstraintKinds
+- PatternSynonyms
+- FlexibleContexts
 
 ghc-options:
 - -Weverything

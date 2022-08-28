@@ -25,12 +25,10 @@ source-repository head
 
 library
   exposed-modules:
-      Language.Compiler.Eval
-      Language.Compiler.Range
-      Language.Compiler.Tc
-      Language.Compiler.Tree
-      Language.Compiler.Types
-      Language.Compiler.Unify
+      Language.Core.Context
+      Language.Core.Conversion
+      Language.Core.PreSyntax
+      Language.Core.Syntax
       Prelude
       Unsafe
   other-modules:
@@ -58,9 +56,13 @@ library
       TupleSections
       TypeApplications
       ViewPatterns
+      ConstraintKinds
+      PatternSynonyms
+      FlexibleContexts
   ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe
   build-depends:
       base-noprelude
+    , megaparsec
     , universum
     , unordered-containers
   default-language: Haskell2010
@@ -92,10 +94,14 @@ executable compiler-project-exe
       TupleSections
       TypeApplications
       ViewPatterns
+      ConstraintKinds
+      PatternSynonyms
+      FlexibleContexts
   ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base-noprelude
     , compiler-project
+    , megaparsec
   default-language: Haskell2010
 
 test-suite compiler-project-test
@@ -126,7 +132,11 @@ test-suite compiler-project-test
       TupleSections
       TypeApplications
       ViewPatterns
+      ConstraintKinds
+      PatternSynonyms
+      FlexibleContexts
   ghc-options: -Weverything -Wno-all-missed-specializations -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base-noprelude
+    , megaparsec
   default-language: Haskell2010
